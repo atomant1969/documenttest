@@ -890,13 +890,35 @@
 
 <h1 id="download-and-install">Download and Install</h1>
 <p>To download and install FCLite API, you need to follow these steps:</p>
-<p>Go to the official website of Gehtsoft USA LLC, the software development company that created FCLite API for Forex Capital Markets (FXCM): https://gehtsoftusa.com/
-Click on the Products tab and select FCLite from the drop-down menu. You will be redirected to the FCLite documentation page: https://docs.gehtsoftusa.com/fclite/#howto.html
-Choose the programming language that you want to use with FCLite API: C++, Java, .NET, or Python. You will see the instructions on how to download and install the corresponding FCLite library for your language.
-Follow the instructions carefully and make sure that you have all the required dependencies and tools for your language and platform. For example, if you want to use FCLite with C++, you will need a C++ compiler that supports C++11 standard, such as Visual Studio 2015 or later, GCC 4.8 or later, or Clang 3.3 or later.
-After you download and install the FCLite library for your language, you can start using it in your application. You will need to include the FCLite header files or import the FCLite modules in your code, depending on your language. You will also need to link your application with the FCLite library files or reference the FCLite assemblies in your project, depending on your platform.
-To test if your installation is successful, you can try to run some of the examples provided by Gehtsoft USA LLC for each language. You can find the examples here: https://docs.gehtsoftusa.com/fclite/#examples.html
-If you encounter any problems or have any questions during the installation process, you can contact Gehtsoft USA LLC's support team at support@gehtsoftusa.com or visit their website at https://gehtsoftusa.com/.</p>
+<p>The first step of adding FXLite to your project is to ensure that you have the npm application installed if you are using a Microsoft Windows computer. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C</label><label for="__tabbed_1_2">C++</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello world!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The next step is to create a file named .npmrc in the root of your project containing a single command:</p>
+<div class="highlight"><pre><span></span><code>@gehtsoft:registry=https://www.myget.org/F/gehtsoft-public/npm/
+</code></pre></div>
+<p>You should open a command prompt and change to the directory containing your project. Then you need to execute the command:</p>
+<p>npm install @gehtsoft/forex-connect-lite</p>
+<p>This will download two packages to your project directory: forex-connect-lite to work in browser and forex-connect-lite-node for node projects. Now you can access the FXLite API from your project.</p>
 
 
 
