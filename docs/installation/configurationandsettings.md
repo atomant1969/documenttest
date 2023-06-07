@@ -1,0 +1,10 @@
+#Configuration and Settings
+After you download and install FCLite API, you need to configure some settings to use it in your application. Here are the main steps that you need to follow:
+
+Create a configuration file for FCLite API, which contains the information about the server URL, the access token, the log level, and the log file path. You can use the sample configuration file provided by Gehtsoft USA LLC here: https://docs.gehtsoftusa.com/fclite/#configuration.html
+Load the configuration file in your code using the FCLite API methods for your language. For example, if you use C++, you can use the method FXCM::Config::load(const char* fileName) to load the configuration file from a given file name.
+Create a session object for FCLite API, which represents a connection to the FXCM trading platform. You can use the FCLite API methods for your language to create and manage the session object. For example, if you use C++, you can use the method FXCM::Session::create() to create a session object.
+Use the session object to perform various trading operations with FCLite API, such as logging in, logging out, subscribing to market data, placing orders, modifying trades, retrieving historical data, and more. You can use the FCLite API methods for your language to access and manipulate the session object. For example, if you use C++, you can use the method FXCM::Session::login() to log in to the FXCM trading platform using the session object.
+For more details on how to configure and use FCLite API for each language, you can refer to the documentation and examples provided by Gehtsoft USA LLC here: https://docs.gehtsoftusa.com/fclite/#howto.html
+
+If you encounter any problems or have any questions during the configuration process, you can contact Gehtsoft USA LLC's support team at support@gehtsoftusa.com or visit their website at https://gehtsoftusa.com/.

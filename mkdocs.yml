@@ -1,0 +1,49 @@
+site_name: FCLite API Documentation
+site_description: FCLite API Documentation
+repo_url: https://github.com/gehtsoft-usa/WebTS-API/
+copyright: Copyright &copy; 2023 <a href="Gehtsoftusa.com">Gehtsoftusa.com</a>
+google_analytics: ['UA-fjoijusdf','gehtsoftusa.com']
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+site_url: http://127.0.0.1:8000/
+nav:
+    - Home: 'index.md'
+    - Introduction:
+        - What is FCLite?: 'introduction/whatisfclite.md'
+        - Why use FCLite?: 'introduction/whyusefclite.md'
+        - How does FCLite work?: 'introduction/howdoesfclitework.md'
+    - Installation:
+        - Prerequisites: 'installation/prerequisites.md'
+        - Download and Install: 'installation/downloadandinstall.md'
+        - Configuration and Settings: 'installation/configurationandsettings.md'
+    - Getting Started:
+        - Create a Project: 'gettingstarted/createaproject.md'
+        - Add References: 'gettingstarted/addreferences.md'
+        - Set up the Connection: 'gettingstarted/setuptheconnection.md'
+        - Execute a Command: 'gettingstarted/executeacommand.md'
+    - Basic Concepts:
+        - Data Types: 'basicconcepts/datatypes.md'
+        - Commands: 'basicconcepts/commands.md'
+        - Parameters: 'basicconcepts/parameters.md'
+        - Transactions: 'basicconcepts/transactions.md'
+    - Advanced Features:
+        - Bulk Operations: 'advancedfeatures/bulkoperations.md'
+        - Asynchronous Methods: 'advancedfeatures/asyncmethods.md'
+        - Logging: 'advancedfeatures/logging.md'
+        - Caching: 'advancedfeatures/caching.md'
+    - Reference:
+        - FCLite Namespace: 'reference/namespaces.md'
+        - FCLite Classes: 'reference/classes.md'
+        - FCLite Methods: 'reference/methods.md'
+        - FCLite Properties: 'reference/properties.md'
+        - FCLite Events: 'reference/events.md'
+    - Examples:
+        - Insert Data: 'examples/insertdata.md'
+        - Update Data: 'examples/updatedata.md'
+        - Delete Data: 'examples/deletedata.md'
+        - Query Data: 'examples/querydata.md'
+theme: material
+#theme: readthedocs
