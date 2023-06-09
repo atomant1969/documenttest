@@ -151,6 +151,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://127.0.0.1:8000/trading/createamarketorder/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/trading/createanentryorder/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://127.0.0.1:8000/trading/createclosemarketorder/</loc>
          <lastmod>2023-06-09</lastmod>
          <changefreq>daily</changefreq>
@@ -166,12 +176,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://127.0.0.1:8000/trading/getavailableinstruments/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://127.0.0.1:8000/trading/getclosedpositions/</loc>
          <lastmod>2023-06-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://127.0.0.1:8000/trading/getinstrumentbysymbol/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://127.0.0.1:8000/trading/getopenpositions/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/trading/getsubscribedinstruments/</loc>
          <lastmod>2023-06-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -182,6 +207,11 @@
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/retreivepriceupdatesforaninstrument/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/trading/subscribeandunsubscribetoinstruments/</loc>
          <lastmod>2023-06-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
