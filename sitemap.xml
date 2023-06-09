@@ -171,7 +171,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>http://127.0.0.1:8000/trading/getopenpositions/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>http://127.0.0.1:8000/trading/retreivehistoricalpricesforaninstrument/</loc>
+         <lastmod>2023-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://127.0.0.1:8000/trading/retreivepriceupdatesforaninstrument/</loc>
          <lastmod>2023-06-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
