@@ -1175,8 +1175,170 @@
 
   <h1>Close All Open Positions</h1>
 
-<p>How to close all positions and orders</p>
-<p>Sometimes, you may want to close all your positions and orders in the trading platform, for example, when you want to exit the market or switch to a different account. To do this, you need to use the FCLite library and its classes and methods.</p>
+<p>How to close all open positions Overview</p>
+<p>This article explains how to close all open positions using the orders manager.<br>
+Closing all open positions means you exit the market and liquidate your assets.<br> 
+You can close all open positions at once, or filter them by instrument or direction.</p>
+<h2>Prerequisites</h2>
+
+<p>Before you can close all open positions, you need to:
+- Create an orders manager. See How to create orders manager for more details.
+- Create a request builder. See the next section for an example.
+- Create a listener function that handles the success or failure of the closing action. See the last section for an example.</p>
+<h3>Creating a request builder</h3>
+<p>A request builder is an object that defines the parameters of the closing action.<br>
+You can create a request builder using the orders manager's getRequestFactory method and passing it the createCloseAllPositionsRequestBuilder method.</p>
+<p>You can use this requestBuilder example:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">requestBuilder</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.CloseAllPositionsRequestBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createCloseAllPositionsRequestBuilder</span><span class="p">();</span>
+<span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">setCustomId</span><span class="p">(</span><span class="s2">&quot;CloseOpenPositions#1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setAcctId</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s2">&quot;GTC&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">requestBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ordersManager</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">createCloseAllPositionsRequestBuilder</span><span class="p">();</span>
+<span class="nx">requestBuilder</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setCustomId</span><span class="p">(</span><span class="s2">&quot;CloseOpenPositions#1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setAcctId</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">account</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s2">&quot;GTC&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>By default, the request builder will close all open positions.<br>
+If you want to close only specific positions, you can add filters to the request builder by calling one or both of these methods:</p>
+<p>setSymbol: This method takes an instrument symbol as an argument and closes only the positions for that instrument.<br>
+setSide: This method takes a direction (buy or sell) as an argument and closes only the positions in that direction.<br></p>
+<p>For example, this code when added to the requestBuilder will close all buy positions for EUR/USD:<br></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">setSide</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">);</span>
+<span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">setSide</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">);</span>
+<span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For example, this code will close all buy positions for EUR/USD:</p>
+<p>See also getRequestFactory, createCloseAllPositionsRequestBuilder, closeAllPositionsRequestBuilder.</p>
+<h3>Closing all open positions</h3>
+
+<p>To close all open positions, you need to call the orders manager's closeAllPositions method and pass it the request builder and a listener function.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">closeAllPositions</span><span class="p">(</span><span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">build</span><span class="p">());</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">closeAllPositions</span><span class="p">(</span><span class="nx">requestBuilder</span><span class="p">.</span><span class="nx">build</span><span class="p">());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The listener function is called when the closing action is completed. It takes two parameters:<br> 
+   - list of closed positions and a list of errors. <br>
+If there are no errors, the second parameter is empty. <br>
+If there are errors, the function onError is called for each error.<br></p>
+<p>See also IOrdersManager, IOpenPositionsManager, closeAllPositions.</p>
+<h3>Creating a listener function</h3>
+
+<p>A listener function is a class that implements the ICloseAllPositionsCallback interface. 
+It has two methods: onClosed and onError. 
+- The onClosed method is called when a position is successfully closed. 
+- The onError method is called when there is an error in closing a position.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TYPESCRIPT</label><label for="__tabbed_4_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">IOpenPositionChangeListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOpenPositionsManager</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOpenPositionsManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onChange</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is changed.`</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onAdd</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is added.`</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onDelete</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is deleted.`</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onRefresh</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Open positions refreshed`</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPositionsSnapshot</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionsManager</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onChange</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is changed.`</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">())</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onAdd</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is added.`</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">())</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onDelete</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> is deleted.`</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onRefresh</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Open positions refreshed`</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">OpenPositionPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPositionsSnapshot</span><span class="p">()</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You can use this class as follows:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TYPESCRIPT</label><label for="__tabbed_5_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Download the sample TypeScript, JavaScript. </p>
 
 
 
