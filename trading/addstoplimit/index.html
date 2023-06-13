@@ -1183,30 +1183,24 @@
 2. Create an OpenPositionsManager object that allows you to manage the open positions.
 3. Create an OrdersManager object that allows you to manage the orders.
 Creating these objects is simple as you can see below.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>``` typescript</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOpenPositionsManager</span><span class="p">();</span><span class="w"> </span><span class="c1">// get open positions manager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span><span class="w"> </span><span class="c1">// get orders manager</span>
+</code></pre></div>
 </div>
-</div>
-</div>
-<p>let openPositionsManager = session.getOpenPositionsManager(); // get open positions manager
-let ordersManager = session.getOrdersManager(); // get orders manager
-    ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">JAVASCRIPT</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
-<p>``` JavaScript</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOpenPositionsManager</span><span class="p">();</span><span class="w"> </span><span class="c1">// get open positions manager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span><span class="w"> </span><span class="c1">// get orders manager</span>
+</code></pre></div>
 </div>
 </div>
 </div>
-<p>let openPositionsManager = session.getOpenPositionsManager(); // get open positions manager
-let ordersManager = session.getOrdersManager(); // get orders manager
-    ```</p>
 <ol>
 <li>Add order change listeners to the OpenPositionsManager and OrdersManager objects to handle the events related to the orders and positions.</li>
 </ol>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1216,7 +1210,7 @@ let ordersManager = session.getOrdersManager(); // get orders manager
 <p>const orderChangeListener = new OrderChangeListener(ordersManager, openPositionsManager); //create listener on the two created managers
 session.getOrdersManager().subscribeOrderChange(orderChangeListener); //attach the listener to the session object to make it active.
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1230,7 +1224,7 @@ session.getOrdersManager().subscribeOrderChange(orderChangeListener); //attach t
 <p>Get the ID of the position or order that you want to attach a stop limit order to. You can use the GetPositions or GetOrders methods of the Session object to retrieve the positions or orders.
 Specify the parameters of the stop limit order, such as the stop price, the limit price, and the quantity. The stop price is the price at which the stop limit order will be triggered. The limit price is the price at which the stop limit order will be executed. The quantity is the number of contracts or shares to trade.
 Below you can see some example code for creating the listeners that are used above:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1263,7 +1257,7 @@ onError(orderInfo) {
 </code></pre>
 <p>}
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1300,7 +1294,7 @@ onError(orderInfo) {
     ```</p>
 <p>See also OrderInfo, IOrdersManager, getOrderById, getOpenPosition, Order</p>
 <p>The method below shows how to create a stop and limit order for an open position and an order:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1332,7 +1326,7 @@ onError(orderInfo) {
 </code></pre>
 <p>}
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1364,7 +1358,7 @@ onError(orderInfo) {
     ```
 Use the attachStopLimitOrderForTradeAndOrder method of the this object to add a stop limit order to the position or order. The method returns a StopLimitOrder object that represents the created stop limit order.
 The example code below shows how you can use the above method to create a stop and limit order for an open position and an order:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1384,7 +1378,7 @@ The example code below shows how you can use the above method to create a stop a
     }
 }
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1406,7 +1400,7 @@ The example code below shows how you can use the above method to create a stop a
     ```</p>
 <p>See also IOpenPositionsManager, getOpenPositionsSnapshot</p>
 <p>This method below shows how to create a stop and limit order for an open position only:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1436,7 +1430,7 @@ The example code below shows how you can use the above method to create a stop a
 </code></pre>
 <p>}
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1467,7 +1461,7 @@ The example code below shows how you can use the above method to create a stop a
     ```
 See also OpenPosition, IOrdersManager, createStopOrder, createLimitOrder, Order, getRequestFactory, createStopOrderRequestBuilder, StopOrderRequestBuilder</p>
 <p>The example code below shows how to use the Stop and limit order function example above for the open position only method:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1487,7 +1481,7 @@ See also OpenPosition, IOrdersManager, createStopOrder, createLimitOrder, Order,
     }
 }
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1509,7 +1503,7 @@ See also OpenPosition, IOrdersManager, createStopOrder, createLimitOrder, Order,
     ```
 See also IOpenPositionsManager, getOpenPositionsSnapshot</p>
 <p>This method below shows how to create a stop and limit order for order only</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1538,7 +1532,7 @@ See also IOpenPositionsManager, getOpenPositionsSnapshot</p>
 </code></pre>
 <p>}
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
@@ -1568,7 +1562,7 @@ See also IOpenPositionsManager, getOpenPositionsSnapshot</p>
     ```
 See also OpenPosition, IOrdersManager, createStopOrder, createLimitOrder, Order, getRequestFactory, createStopOrderRequestBuilder, StopOrderRequestBuilder</p>
 <p>The example code below shows how to use the Stop and limit order method for order only</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">TYPESCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">TYPESCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` typescript</p>
@@ -1588,7 +1582,7 @@ See also OpenPosition, IOrdersManager, createStopOrder, createLimitOrder, Order,
     }
 } 
     ```</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">JAVASCRIPT</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>``` JavaScript</p>
