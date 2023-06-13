@@ -1180,19 +1180,100 @@
 You can use entry orders to enter a trade at a favorable price or to set a stop-loss or take-profit for an existing trade.</p>
 <p>Steps</p>
 <p>To create an entry order, you need to follow these steps:</p>
-<p>Create an EntryOrderFactory object, which is a helper class that helps you set up the order parameters, such as the instrument, the direction, the amount, the price, and the expiration date. You can use the following code to create an EntryOrderFactory object:
-<typescript code><javascript code></p>
+<p>Create an EntryOrderFactory object, which is a helper class that helps you set up the order parameters, such as the instrument, the direction, the amount, the price, and the expiration date. You can use the following code to create an EntryOrderFactory object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>``` typescript
+class EntryOrderFactory {
+    static create(manager, offersManager, accountId, offerId, amount) {</p>
+<pre><code>    let offer = offersManager.getOfferById(offerId);
+
+    return manager.getRequestFactory().createEntryOrderRequestBuilder()
+    .setAccountId(accountId)
+    .setAmount(amount)
+    .setOfferId(offerId)
+    .setBuySell('B')
+    .setTimeInForce('GTC')
+    .setCustomId('custom-id-open')
+    .setLimitRate(offer.getAsk() + offer.getAsk() / 90)
+    .setStopRate(offer.getAsk() - offer.getAsk() / 100)
+    .setRate(offer.getAsk() + offer.getAsk() / 100)
+    .setRateRange(10)
+    .enableTrailingStop(FXConnectLite.TrailingStopType.Fixed, 10)
+    .build();
+}
+</code></pre>
+<p>}     ```</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">EntryOrderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">EntryOrderFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">EntryOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">accountId</span><span class="p">,</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">offer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">.</span><span class="nx">getOfferById</span><span class="p">(</span><span class="nx">offerId</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createEntryOrderRequestBuilder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAccountId</span><span class="p">(</span><span class="nx">accountId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setOfferId</span><span class="p">(</span><span class="nx">offerId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setBuySell</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s1">&#39;GTC&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setCustomId</span><span class="p">(</span><span class="s1">&#39;custom-id-open&#39;</span><span class="p">)</span><span class="w">                      </span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setLimitRate</span><span class="p">(</span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">90</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setStopRate</span><span class="p">(</span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setRate</span><span class="p">(</span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">offer</span><span class="p">.</span><span class="nx">getAsk</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setRateRange</span><span class="p">(</span><span class="mf">10</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">enableTrailingStop</span><span class="p">(</span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">TrailingStopType</span><span class="p">.</span><span class="nx">Fixed</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">EntryOrderFactory</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the EntryOrderFactory class and its methods, see IOrdersManager, getRequestFactory,IOrdersRequestBuilderFactory, EntryOrderRequestBuilder.</p>
-<p>Use the EntryOrderFactory object to create an entry order request, which is an object that contains all the information needed to place the order. You can use the following code to create an entry order request:
-<typescript code><javascript code></p>
+<p>Use the EntryOrderFactory object to create an entry order request, which is an object that contains all the information needed to place the order.<br> 
+You can use the following code to create an entry order request:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">offerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrument</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="c1">//any integer</span>
+<span class="c1">//create ordersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="c1">//create offersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="c1">//create accountManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">accountsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getAccountsManager</span><span class="p">();</span>
+<span class="c1">//get first account</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountById</span><span class="p">(</span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountsInfo</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getId</span><span class="p">());</span>
+<span class="c1">//create request using our custom order factory</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">EntryOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="c1">//create entry order</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">createEntryOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">offerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrument</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="c1">//any integer</span>
+<span class="c1">//create ordersManager</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="c1">//create offersManager</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="c1">//create accountManager</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">accountsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getAccountsManager</span><span class="p">();</span>
+<span class="c1">//get first account</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountById</span><span class="p">(</span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountsInfo</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getId</span><span class="p">());</span>
+<span class="c1">//create request using our custom order factory</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">EntryOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="c1">//create entry order</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">createEntryOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the createEntryOrder method and its parameters, see createEntryOrder.</p>
-<p>Send the entry order request to the server using the send method of the IOrdersManager interface. You can use the following code to send the entry order request:
-<typescript code><javascript code></p>
-<p>For more information about the send method and its callbacks, see IOrdersManager.</p>
-<p>Check the status of your entry order using the getOrders method of the IOrdersManager interface. You can use the following code to get a list of your orders:
-<typescript code><javascript code></p>
-<p>For more information about the getOrders method and its return value, see IOrdersManager.</p>
-<p>Examples</p>
 <p>You can download and run the sample TypeScript and JavaScript files to see how to create an entry order in action.</p>
 
 
