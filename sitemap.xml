@@ -2,217 +2,217 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://127.0.0.1:8000/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/advancedfeatures/asyncmethods/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/advancedfeatures/bulkoperations/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/advancedfeatures/caching/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/advancedfeatures/logging/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/basicconcepts/commands/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/basicconcepts/datatypes/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/basicconcepts/parameters/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/basicconcepts/transactions/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/examples/deletedata/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/examples/insertdata/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/examples/querydata/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/examples/updatedata/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/gettingstarted/addreferences/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/gettingstarted/createaproject/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/gettingstarted/executeacommand/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/gettingstarted/setuptheconnection/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/installation/configurationandsettings/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/installation/downloadandinstall/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/installation/prerequisites/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/introduction/howdoesfclitework/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/introduction/whatisfclite/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/introduction/whyusefclite/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/reference/classes/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/reference/events/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/reference/methods/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/reference/namespaces/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/reference/properties/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/addstoplimit/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/closeallpositions/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/createamarketorder/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/createanentryorder/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/createclosemarketorder/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getallaccounts/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getallorders/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getavailableinstruments/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getclosedpositions/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getinstrumentbysymbol/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getopenpositions/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/getsubscribedinstruments/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/retreivehistoricalpricesforaninstrument/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/retreivepriceupdatesforaninstrument/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://127.0.0.1:8000/trading/subscribeandunsubscribetoinstruments/</loc>
-         <lastmod>2023-06-09</lastmod>
+         <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
