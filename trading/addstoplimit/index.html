@@ -1179,11 +1179,11 @@
 <p>How to attach a stop limit order to a position or an order A stop limit order is a special kind of order that lets you set a price range for buying or selling an instrument. It has two parts: a stop price and a limit price. The stop price is the level that activates the order. The limit price is the level that executes the order.</p>
 <p>For example, suppose you want to buy EUR/USD at 1.2000, but you don't want to pay more than 1.2050. You can place a stop limit order with a stop price of 1.2000 and a limit price of 1.2050. This means that when the market price reaches 1.2000, your order will become active and try to buy EUR/USD at 1.2050 or lower. However, if the market price jumps above 1.2050 before your order is executed, your order will not be filled.</p>
 <p>You can use a stop limit order to protect your profits or limit your losses on an existing position, or to enter a new position at a specific price range. To do this, you need to use the FCLite library, which is a Java package that connects to the trading platform's API.</p>
-<p>To add a stop limit order to a position or an order, you need to follow these steps:
+<p>To add a stop limit order to a position or an order, you need to follow these steps:<br>
 1. Create a session object.<br>
 1. Create a Session object that allows you to connect to the server and log in with your credentials.<br>
-2. Create an OpenPositionsManager object that allows you to manage the open positions.<br>
-3. Create an OrdersManager object that allows you to manage the orders.<br>
+1. Create an OpenPositionsManager object that allows you to manage the open positions.<br>
+1. Create an OrdersManager object that allows you to manage the orders.<br>
 Creating these objects is simple as you can see below.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
 <div class="tabbed-content">
@@ -1220,10 +1220,10 @@ Creating these objects is simple as you can see below.</p>
 <p>Get the ID of the position or order that you want to attach a stop limit order to. <br>
 You can use the GetPositions or GetOrders methods of the Session object to retrieve the positions or orders.<br>
 Specify the parameters of the stop limit order, such as:<br>
-The stop price, the limit price, and the quantity. <br>
-The stop price is the price at which the stop limit order will be triggered. <br>
-The limit price is the price at which the stop limit order will be executed. <br>
-The quantity is the number of contracts or shares to trade.<br>
+- The stop price, the limit price, and the quantity. <br>
+- The stop price is the price at which the stop limit order will be triggered. <br>
+- The limit price is the price at which the stop limit order will be executed. <br>
+- The quantity is the number of contracts or shares to trade.<br>
 Below you can see some example code for creating the listeners that are used above:<br></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
 <div class="tabbed-content">
