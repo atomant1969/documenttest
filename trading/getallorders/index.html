@@ -1175,9 +1175,110 @@
 
   <h1>Get All Orders</h1>
 
-<p>How to get a list of all orders</p>
-<p>An order is a request to buy or sell an instrument at a specified price or condition. An order can be active, meaning it is waiting to be executed, or filled, meaning it has been executed and resulted in a position.</p>
-<p>To get a list of all orders, you need to use the FCLite library and its classes and methods.</p>
+<p>How to get a list of all orders Overview</p>
+<p>This article explains how to get a list of all orders using the order manager. Orders are instructions to buy or sell an instrument at a specified price, volume, and time. You can get a list of all orders, or filter them by instrument, status, or type.</p>
+<h2>Prerequisites</h2>
+
+<p>Before you can get a list of all orders, you need to:
+- Create an order manager. See How to create order manager for more details.
+- Subscribe to the state change event. See the next section for an example.
+- Create an order printer. See the last section for an example.
+- Subscribing to the state change event</p>
+<p>The state change event is an event that occurs when the order manager's state changes.<br>
+The state can change due to new orders, modified orders, cancelled orders, or executed orders.<br>
+To subscribe to the state change event, you need to create a listener function that implements the IStateChangeListener interface.<br>
+The listener function has one method: onStateChanged. The method is called when the state change event occurs.</p>
+<p>Below you can see some example code for to subscribe to the state change event:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">().</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="nx">completeHandler</span><span class="p">);</span><span class="w"> </span><span class="c1">//get orders manager</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">().</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="nx">completeHandler</span><span class="p">);</span><span class="w"> </span><span class="c1">//get orders manager</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>To use the listener function, you need to subscribe it to the order manager using the subscribeStateChange method.<br>
+You also need to call the refresh method to initialize the order manager's state.</p>
+<p>See also subscribeStateChange, refresh</p>
+<h3>Getting a list of all orders</h3>
+
+<p>To get a list of all orders, you can use the order manager's getOrdersSnapshot method.<br>
+This method returns a list of all orders that are currently in the order manager's state. 
+You can use the order printer to print the details of each order.</p>
+<p>Below you can see some example code for getOrdersSnapshot :</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">getOrdersSnapshot</span><span class="p">());</span><span class="w"> </span><span class="c1">// get orders snapshot</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">getOrdersSnapshot</span><span class="p">());</span><span class="w"> </span><span class="c1">// get orders snapshot</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>See also IOrdersManager, getOrdersSnapshot</p>
+<h3>Creating an order printer</h3>
+
+<p>An order printer is a function that takes an order as an argument and prints its base properties.<br></p>
+<p>The base properties are:
+- id: The unique identifier of the order.
+- symbol: The instrument symbol of the order.
+- side: The direction (buy or sell) of the order.
+- type: The type (market, limit, stop, etc.) of the order.
+- volume: The amount of units of the instrument to buy or sell.
+- price: The price at which the order is executed.
+- status: The status (pending, filled, cancelled, etc.) of the order.</p>
+<p>Below you can see some example code for the order printer : </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OrderPrinter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">print</span><span class="p">(</span><span class="nx">order</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.Order</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OrderId = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getOrderId</span><span class="p">()</span><span class="si">}</span><span class="sb"> AccountId = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">()</span><span class="si">}</span><span class="sb"> OfferId = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">()</span><span class="si">}</span><span class="sb"> Amount = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">()</span><span class="si">}</span><span class="sb"> Rate = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> Type = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getType</span><span class="p">()</span><span class="si">}</span><span class="sb"> Status = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">()</span><span class="si">}</span><span class="sb"> BuySell = </span><span class="si">${</span><span class="nx">order</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">printAll</span><span class="p">(</span><span class="nx">orders</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.Order</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Current orders snapshot:`</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Number of orders is </span><span class="si">${</span><span class="nx">orders</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">orders</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">order</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">order</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">OrderPrinter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OrderPrinter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">print</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;OrderId = &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getOrderId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; AccountId = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; OfferId = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; Amount = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; Rate = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; Type = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getType</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; Status = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getStatus</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; BuySell = &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">order</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">orders</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Current orders snapshot:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Number of orders is &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">orders</span><span class="p">.</span><span class="nx">length</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">orders</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">OrderPrinter</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">order</span><span class="p">);</span><span class="w"> </span><span class="c1">// show account property</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OrderPrinter</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>See also Order</p>
+<p>Download the sample TypeScript, JavaScript. </p>
 
 
 
