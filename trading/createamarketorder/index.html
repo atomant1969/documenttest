@@ -1176,7 +1176,102 @@
   <h1>Create A Market Order</h1>
 
 <p>How to create a market order</p>
-<p>The FCLite API allows you to programmatically create a market order on the FCLite platform. A market order is a type of order that executes immediately at the current market price of an instrument. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>This article will show you how to create a market order, which is a type of order that is executed immediately at the current market price.<br>
+You can use market orders to open a new trade or to close an existing trade.</p>
+<h2>Steps</h2>
+
+<p>To create a market order, you need to follow these steps:</p>
+<ol>
+<li>Create an OpenOrderFactory object, which is a helper class that helps you set up the order parameters, such as the instrument, the direction, the amount, and the slippage. You can use the following code to create an OpenOrderFactory object:</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OpenOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">accountId</span><span class="p">,</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createMarketOrderRequestBuilder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAccountId</span><span class="p">(</span><span class="nx">accountId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setOfferId</span><span class="p">(</span><span class="nx">offerId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setBuySell</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s1">&#39;IOC&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="nx">OpenOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">accountId</span><span class="p">,</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createMarketOrderRequestBuilder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAccountId</span><span class="p">(</span><span class="nx">accountId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setOfferId</span><span class="p">(</span><span class="nx">offerId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setBuySell</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s1">&#39;IOC&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the OpenOrderFactory class and its methods, see IOrdersManager, getRequestFactory, MarketOrderRequestBuilder.</p>
+<ol>
+<li>Use the OpenOrderFactory object to create a market order request, which is an object that contains all the information needed to place the order.<br></li>
+</ol>
+<p>You can use the following code to create a market order request:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getInstrumentBySymbol</span><span class="p">(</span><span class="s2">&quot;EUR/GBP&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//getting offer Id</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">offerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrument</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="c1">//any integer</span>
+<span class="w">    </span><span class="c1">//create ordersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//create offersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//create accountManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">accountsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getAccountsManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//get first account</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountById</span><span class="p">(</span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountsInfo</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getId</span><span class="p">());</span><span class="c1">// a user can have multiple accounts.</span>
+<span class="w">    </span><span class="c1">//create using order factory</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//create market order</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">createOpenMarketOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getInstrumentBySymbol</span><span class="p">(</span><span class="s2">&quot;EUR/GBP&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//getting offer Id</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">offerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrument</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="c1">//any integer</span>
+<span class="w">    </span><span class="c1">//create ordersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//create offersManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//create accountManager</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">accountsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getAccountsManager</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//get first account</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountById</span><span class="p">(</span><span class="nx">accountsManager</span><span class="p">.</span><span class="nx">getAccountsInfo</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getId</span><span class="p">());</span><span class="c1">// a user can have multiple accounts.</span>
+<span class="w">    </span><span class="c1">//create using order factory</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">OpenOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="nx">offerId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//create market order</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">createOpenMarketOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the createOpenMarketOrder method and its parameters, see createOpenMarketOrder.</p>
+<p>Examples</p>
+<p>You can download and run the sample TypeScript and JavaScript files to see how to create a market order in action.</p>
 
 
 
