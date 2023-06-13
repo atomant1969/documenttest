@@ -1175,9 +1175,245 @@
 
   <h1>Create A Close Market Order</h1>
 
-<p>How to create a close market order</p>
-<p>A close market order is a type of order that closes an existing position at the current market price. It is the simplest and fastest way to exit the market and lock in your profit or loss.</p>
-<p>To create a close market order, you need to use the FCLite library and its classes and methods.</p>
+<p>How to create a close market order Introduction</p>
+<p>This article will show you how to create a close market order, which is a type of order that is executed immediately at the current market price to close an existing trade.<br>
+You can use close market orders to exit a trade and lock in your profit or loss.</p>
+<h3>Steps</h3>
+
+<p>To create a close market order, you need to follow these steps:</p>
+<ol>
+<li>Create a CloseOrderFactory object, which is a helper class that helps you set up the order parameters, such as the instrument, the direction, and the amount.<br></li>
+</ol>
+<p>You can use the following code to create a CloseOrderFactory object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">create</span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">tradeId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createCloseMarketOrderRequestBuilder</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setTradeId</span><span class="p">(</span><span class="nx">tradeId</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setRateRange</span><span class="p">(</span><span class="mf">10</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s1">&#39;IOC&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">setCustomId</span><span class="p">(</span><span class="s1">&#39;custom-id-close&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">CloseOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">manager</span><span class="p">,</span><span class="w"> </span><span class="nx">tradeId</span><span class="p">,</span><span class="w"> </span><span class="nx">amount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">getRequestFactory</span><span class="p">().</span><span class="nx">createCloseMarketOrderRequestBuilder</span><span class="p">()</span><span class="w"> </span><span class="c1">// create builder and set properties</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">setTradeId</span><span class="p">(</span><span class="nx">tradeId</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">setAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">setRateRange</span><span class="p">(</span><span class="mf">10</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">setTimeInForce</span><span class="p">(</span><span class="s1">&#39;IOC&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">setCustomId</span><span class="p">(</span><span class="s1">&#39;custom-id-close&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="p">;</span>
+<span class="p">}());</span><span class="w"> </span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the CloseOrderFactory class and its methods, see getRequestFactory, createCloseMarketOrderRequestBuilder, CloseMarketOrderRequestBuilder.</p>
+<h3>Use the CloseOrderFactory object to create a close market order request</h3>
+<p>, which is an object that contains all the information needed to place the order.<br>
+You can use the following code to create a close market order request:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">session</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IFXConnectLiteSession</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">session</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IFXConnectLiteSession</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">execute</span><span class="p">(</span><span class="nx">tradeId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Place close market order...`</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">getOpenPositionsManager</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">tradeId</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">ordersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">tradeId</span><span class="p">,</span><span class="w"> </span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">createCloseMarketOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="p">(</span><span class="nx">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">PlaceCloseOrderAction</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">execute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">tradeId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Place close market order...&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">ordersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">getOrdersManager</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">openPositionManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">getOpenPositionsManager</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">tradeId</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">CloseOrderFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">ordersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">tradeId</span><span class="p">,</span><span class="w"> </span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">ordersManager</span><span class="p">.</span><span class="nx">createCloseMarketOrder</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the createCloseMarketOrder method and its parameters, see IOrdersManager,IOpenPositionsManager, createCloseMarketOrder.</p>
+<p>Send the close market order request to the server using the send method of the IOrdersManager interface.<br>
+You can use the following code to send the close market order request:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the send method and its callbacks, see IOrdersManager.</p>
+<h3>Listen for changes in your open positions using the OpenPositionsChangeListener interface.</h3>
+<p><br></p>
+<p>You can use the following code to register a listener that will be notified when an open position is changed:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TYPESCRIPT</label><label for="__tabbed_4_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">(</span><span class="nx">openPositionManager</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="p">(</span><span class="nx">session</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">openPositionChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">(</span><span class="nx">openPositionManager</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PlaceCloseOrderAction</span><span class="p">(</span><span class="nx">session</span><span class="p">));</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the OpenPositionsChangeListener interface and its methods, see IOrdersManager,IOpenPositionsManager, OpenPositionInfo, OpenPosition.</p>
+<p>Below you can see the events that are monitored by the listener:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TYPESCRIPT</label><label for="__tabbed_5_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">IOpenPositionChangeListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOpenPositionsManager</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">placeCloseOrderAction</span><span class="o">:</span><span class="w"> </span><span class="kt">PlaceCloseOrderAction</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOpenPositionsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">placeCloseOrderAction</span><span class="o">:</span><span class="w"> </span><span class="kt">PlaceCloseOrderAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">placeCloseOrderAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">placeCloseOrderAction</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onChange</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onAdd</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> added.`</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">me</span><span class="p">.</span><span class="nx">placeCloseOrderAction</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">())</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onDelete</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPositionInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`OpenPosition </span><span class="si">${</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb"> deleted.`</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onRefresh</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">(</span><span class="nx">openPositionsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">placeCloseOrderAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openPositionsManager</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">placeCloseOrderAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">placeCloseOrderAction</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OpenPositionChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OpenPositionChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;OpenPosition &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; added.&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">me</span><span class="p">.</span><span class="nx">placeCloseOrderAction</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">());</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span><span class="w"> </span><span class="c1">//wait execution</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OpenPositionChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onDelete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">openPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">openPositionsManager</span><span class="p">.</span><span class="nx">getOpenPosition</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;OpenPosition &quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPositionInfo</span><span class="p">.</span><span class="nx">getId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; deleted.&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">));</span><span class="w"> </span><span class="c1">//log that position was deleted</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OpenPositionChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onRefresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OpenPositionChangeListener</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>See also IOrdersManager,IOpenPositionsManager, OpenPositionInfo, OpenPosition</p>
+<h3>Use the formatter class to display the open position properties in a readable text format.</h3>
+<p><br></p>
+<p>You can use the following code to create and use a formatter object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">TYPESCRIPT</label><label for="__tabbed_6_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OpenPositionFormatter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">TITLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`# | TradeID | AccountId | UsedMargin | Amount | BuySell | OpenRate | CloseRate | StopRate | LimitRate`</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">formatByIndex</span><span class="p">(</span><span class="nx">index</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">openPosition</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPosition</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">formatString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">index</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getTradeID</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getUsedMargin</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getOpenRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getCloseRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getStopRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getLimitRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> |`</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">format</span><span class="p">(</span><span class="nx">openPosition</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OpenPosition</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">formatString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getTradeID</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getUsedMargin</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getOpenRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getCloseRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getStopRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> | </span><span class="si">${</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getLimitRate</span><span class="p">()</span><span class="si">}</span><span class="sb"> |`</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">OpenPositionFormatter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OpenPositionFormatter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">formatByIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">openPosition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">formatString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getTradeID</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getUsedMargin</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getOpenRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getCloseRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getStopRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getLimitRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; |&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">openPosition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">formatString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getTradeID</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAccountId</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getUsedMargin</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getBuySell</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getOpenRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getCloseRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getStopRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">openPosition</span><span class="p">.</span><span class="nx">getLimitRate</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; |&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">formatString</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OpenPositionFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;# | TradeID | AccountId | UsedMargin | Amount | BuySell | OpenRate | CloseRate | StopRate | LimitRate&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OpenPositionFormatter</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the formatter class and its methods, see OpenPosition.</p>
+<p>Examples</p>
+<p>You can download and run the sample TypeScript and JavaScript files to see how to create a close market order in action.</p>
 
 
 
