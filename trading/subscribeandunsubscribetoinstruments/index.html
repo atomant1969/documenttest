@@ -1175,8 +1175,130 @@
 
   <h1>Subscribe To Or Unsucribe From An Instrument</h1>
 
-<p>How to create a market order</p>
-<p>The FCLite API allows you to programmatically create a market order on the FCLite platform. A market order is a type of order that executes immediately at the current market price of an instrument. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>How to subscribe and unsubscribe to instruments Introduction</p>
+<p>This article will show you how to subscribe and unsubscribe to instruments, which are the financial assets that you can trade on the platform, such as currency pairs, stocks, indices, etc.<br>
+You can use the IInstrumentsManager interface to manage your subscriptions and get information about the instruments.</p>
+<h3>Steps</h3>
+
+<p>To subscribe and unsubscribe to instruments, you need to follow these steps:</p>
+<ol>
+<li>Create a SubscribeCallback object, which is a callback class that handles the subscription results.<br>
+You can use the following code to create a SubscribeCallback object:</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">SubscribeCallback</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">ISubscribeInstrumentsCallback</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">resolve</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resolve</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Subscribe success&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Subscribe error: &quot;</span><span class="o">+</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">SubscribeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onSuccess</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Subscribe Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">subscribedSymbols</span><span class="o">:</span><span class="w"> </span><span class="nx">subscribedSymbols</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">onError</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Subscribe Fail:&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The onError method is called if at least one subscription to an instrument fails.</p>
+<p>For more information about the SubscribeCallback class and its methods, see ISubscribeInstrumentsCallback.</p>
+<h3>Getting a list of your subscribed instruments</h3>
+<p>You can check the list of subscribed instruments by calling the instrument manager's getSubscribedInstruments method.<br>
+To obtain a list of your subscribed instruments, please read this item: https://docs.gehtsoftusa.com/fclite/howto_get_a_list_of_subscribed_instruments.html</p>
+<h3>Getting an instrument symbol</h3>
+<p>Get an instrument symbol using the InstrumentDescriptor class, which is a helper class that helps you identify an instrument by its name, type, and exchange.<br></p>
+<p>You can use the following code to get an instrument symbol:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrumentSymbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getSubscribedInstruments</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getSymbol</span><span class="p">();</span>
+<span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">unsubscribeInstruments</span><span class="p">([</span><span class="nx">instrumentSymbol</span><span class="p">],</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">UnsubscribeCallback</span><span class="p">(</span><span class="nx">resolve</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">instrumentSymbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getSubscribedInstruments</span><span class="p">()[</span><span class="mf">0</span><span class="p">].</span><span class="nx">getSymbol</span><span class="p">();</span>
+<span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">unsubscribeInstruments</span><span class="p">([</span><span class="nx">instrumentSymbol</span><span class="p">],</span><span class="w"> </span><span class="nx">unsubscribeInstrumentsCallback</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the InstrumentDescriptor class and its methods, see getSymbol.</p>
+<h3>Subscribing To An Instrument</h3>
+<p>To subscribe to an instrument, you use the instrument manager's subscribe method and pass it the symbol of the instrument and the callback function.</p>
+<p>You can use the following code to create an SubscribeCallback object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">subscribeInstruments</span><span class="p">([</span><span class="s2">&quot;EUR/GBP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">],</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">SubscribeCallback</span><span class="p">(</span><span class="nx">resolve</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">subscribeInstruments</span><span class="p">([</span><span class="s2">&quot;EUR/GBP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">subscribeInstrumentsCallback</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>This instrument will now appear on your list of subscribed instruments when performing the getSubscribedInstruments action.</p>
+<p>See also IInstrumentsManager, ISubscribeInstrumentsCallback</p>
+<h3>Unsubscribing From An Indicator</h3>
+<p>Create an UnsubscribeCallback object, which is a callback class that handles the unsubscription results.<br></p>
+<p>You can use the following code to create an UnsubscribeCallback object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TYPESCRIPT</label><label for="__tabbed_4_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">UnsubscribeCallback</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">ISubscribeInstrumentsCallback</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">resolve</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">resolve</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resolve</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Unsubscribe success&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Unsubscribe error: &quot;</span><span class="o">+</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">UnsubscribeCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onSuccess</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Unsubscribe Success:&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">subscribedSymbols</span><span class="o">:</span><span class="w"> </span><span class="nx">subscribedSymbols</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">onError</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Unsubscribe Fail:&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The onError method is called if at least one unsubscription to an instrument fails.</p>
+<p>For more information about the UnsubscribeCallback class and its methods, see ISubscribeInstrumentsCallback.</p>
+<p>Examples</p>
+<p>You can download and run the sample TypeScript and JavaScript files to see how to subscribe and unsubscribe to instruments in action.</p>
 
 
 
