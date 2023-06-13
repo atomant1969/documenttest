@@ -1176,7 +1176,24 @@
   <h1>Create An Entry Order</h1>
 
 <p>How to create an entry order</p>
-<p>The FCLite API allows you to programmatically create an entry order on the FCLite platform. An entry order is a type of order that executes only when the market price of an instrument reaches a specified level. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>This article will show you how to create an entry order, which is a type of order that is executed when the market price reaches a specified level. <br>
+You can use entry orders to enter a trade at a favorable price or to set a stop-loss or take-profit for an existing trade.</p>
+<p>Steps</p>
+<p>To create an entry order, you need to follow these steps:</p>
+<p>Create an EntryOrderFactory object, which is a helper class that helps you set up the order parameters, such as the instrument, the direction, the amount, the price, and the expiration date. You can use the following code to create an EntryOrderFactory object:
+<typescript code><javascript code></p>
+<p>For more information about the EntryOrderFactory class and its methods, see IOrdersManager, getRequestFactory,IOrdersRequestBuilderFactory, EntryOrderRequestBuilder.</p>
+<p>Use the EntryOrderFactory object to create an entry order request, which is an object that contains all the information needed to place the order. You can use the following code to create an entry order request:
+<typescript code><javascript code></p>
+<p>For more information about the createEntryOrder method and its parameters, see createEntryOrder.</p>
+<p>Send the entry order request to the server using the send method of the IOrdersManager interface. You can use the following code to send the entry order request:
+<typescript code><javascript code></p>
+<p>For more information about the send method and its callbacks, see IOrdersManager.</p>
+<p>Check the status of your entry order using the getOrders method of the IOrdersManager interface. You can use the following code to get a list of your orders:
+<typescript code><javascript code></p>
+<p>For more information about the getOrders method and its return value, see IOrdersManager.</p>
+<p>Examples</p>
+<p>You can download and run the sample TypeScript and JavaScript files to see how to create an entry order in action.</p>
 
 
 
