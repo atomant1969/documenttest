@@ -1217,9 +1217,14 @@ Creating these objects is simple as you can see below.</p>
 </div>
 </div>
 <p>See also IOpenPositionsManager, IOrdersManager, subscribeOrderChange</p>
-<p>Get the ID of the position or order that you want to attach a stop limit order to. You can use the GetPositions or GetOrders methods of the Session object to retrieve the positions or orders.
-Specify the parameters of the stop limit order, such as the stop price, the limit price, and the quantity. The stop price is the price at which the stop limit order will be triggered. The limit price is the price at which the stop limit order will be executed. The quantity is the number of contracts or shares to trade.
-Below you can see some example code for creating the listeners that are used above:</p>
+<p>Get the ID of the position or order that you want to attach a stop limit order to. <br>
+You can use the GetPositions or GetOrders methods of the Session object to retrieve the positions or orders.<br>
+Specify the parameters of the stop limit order, such as:<br>
+The stop price, the limit price, and the quantity. <br>
+The stop price is the price at which the stop limit order will be triggered. <br>
+The limit price is the price at which the stop limit order will be executed. <br>
+The quantity is the number of contracts or shares to trade.<br>
+Below you can see some example code for creating the listeners that are used above:<br></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1340,8 +1345,9 @@ Below you can see some example code for creating the listeners that are used abo
 </div>
 </div>
 </div>
-<p>Use the attachStopLimitOrderForTradeAndOrder method of the this object to add a stop limit order to the position or order. The method returns a StopLimitOrder object that represents the created stop limit order.
-The example code below shows how you can use the above method to create a stop and limit order for an open position and an order:</p>
+<p>Use the attachStopLimitOrderForTradeAndOrder method of the this object to add a stop limit order to the position or order.<br>
+The method returns a StopLimitOrder object that represents the created stop limit order.<br>
+The example code below shows how you can use the above method to create a stop and limit order for an open position and an order:<br></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TYPESCRIPT</label><label for="__tabbed_5_2">JAVASCRIPT</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1563,7 +1569,9 @@ The example code below shows how you can use the above method to create a stop a
 </div>
 <p>See also IOrdersManager, getOrdersSnapshot</p>
 <p>Download the sample TypeScript, JavaScript</p>
-<p>In order to perform changes to Stop/Limit, you should understand that the sto pand limits are also orders, however they are orders specifically associated with an open position order or order. So, you first need to get the main order and then locate the associated Stop/Limit order and then perform an update on that order or Cancel it.</p>
+<p>In order to perform changes to Stop/Limit, you should understand that the sto pand limits are also orders, 
+however they are orders specifically associated with an open position order or order. 
+So, you first need to get the main order and then locate the associated Stop/Limit order and then perform an update on that order or Cancel it.</p>
 <p>See Also ...</p>
 
 
