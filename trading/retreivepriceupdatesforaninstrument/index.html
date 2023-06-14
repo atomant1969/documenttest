@@ -1175,8 +1175,155 @@
 
   <h1>Get Prices Updates for an Instrument</h1>
 
-<p>How to get a price update for an instrument</p>
-<p>The FCLite API allows you to programmatically access the current price for any instrument that is available on the FCLite platform. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. A price update is the latest information about the price of an instrument, such as the bid, ask, and spread.</p>
+<p>How to receive price updates for an instrument Overview</p>
+<p>This article will show you how to use the API to receive price updates for an instrument.<br>
+Before you can receive price updates for an instrument, you need to:<br>
+- Subscribe to the offers manager change event
+- Create an offer's state change listener
+- Receive price updates for an instrument</p>
+<p><strong>Step 1:</strong> Subscribe to the offers manager change event</p>
+<p>The first step is to subscribe to the offers manager change event.<br>
+This event is triggered when the offer data has changed, such as when a new offer is added, removed, or updated.<br>
+You can use the IOffersManager interface to access the methods and properties of the offers manager.</p>
+<p>Below you can see some example code for subscribing to the offers manager change event:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="c1">//subscribe to the offersManager change to get an event when offer data has changed</span>
+<span class="nx">offersManager</span><span class="p">.</span><span class="nx">subscribeOfferChange</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="p">(</span><span class="nx">instrumentsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">))</span>
+<span class="nx">offersManager</span><span class="p">.</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">OffersStateChangeListener</span><span class="p">(</span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">();</span>
+<span class="c1">//subscribe to the offersManager change to get an event when offer data has changed</span>
+<span class="nx">offersManager</span><span class="p">.</span><span class="nx">subscribeOfferChange</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="p">(</span><span class="nx">instrumentsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">));</span>
+<span class="nx">offersManager</span><span class="p">.</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">OffersStateChangeListener</span><span class="p">(</span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">));</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the IOffersManager interface, see the API reference.</p>
+<p><strong>Step 2:</strong> Create an offer's state change listener</p>
+<p>The next step is to create an offer's state change listener.<br>
+This is a function that will be called whenever an offer's state changes, such as when its price, volume, or spread changes.<br>
+You can use the getOfferById method of the offers manager to get an offer by its ID.</p>
+<p>Below you can see some example code to create an offer's state change listener:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">IOfferChangeListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">isFirstOfferChange</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IInstrumentsManager</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="nx">offersManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOffersManager</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">instrumentManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IInstrumentsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IOffersManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentManager</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onChange</span><span class="p">(</span><span class="nx">offerInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OfferInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isFirstOfferChange</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">``</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`Offers changes:`</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">``</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">isFirstOfferChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">offer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="p">.</span><span class="nx">getOfferById</span><span class="p">(</span><span class="nx">offerInfo</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">offer</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">instrumentsManager</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">onAdd</span><span class="p">(</span><span class="nx">offerInfo</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.OfferInfo</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">OffersStateChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OffersStateChangeListener</span><span class="p">(</span><span class="nx">offersManager</span><span class="p">,</span><span class="w"> </span><span class="nx">instrumentManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">instrumentManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentManager</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OffersStateChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">printOffers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">offers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">_this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">offers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">offer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">offer</span><span class="p">,</span><span class="w"> </span><span class="nx">_this</span><span class="p">.</span><span class="nx">instrumentManager</span><span class="p">));</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OffersStateChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onStateChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">isLoaded</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">printOffers</span><span class="p">(</span><span class="s2">&quot;All initial offers:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="p">.</span><span class="nx">getAllOffers</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OffersStateChangeListener</span><span class="p">;</span>
+<span class="p">}());</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="p">(</span><span class="nx">instrumentManager</span><span class="p">,</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">isFirstOfferChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentManager</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">offersManager</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">OfferChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">offerInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isFirstOfferChange</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Offers changes:&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">TITLE</span><span class="p">);</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">isFirstOfferChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">offer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">offersManager</span><span class="p">.</span><span class="nx">getOfferById</span><span class="p">(</span><span class="nx">offerInfo</span><span class="p">.</span><span class="nx">getOfferId</span><span class="p">());</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">OfferFormatter</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="nx">offer</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">instrumentsManager</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">OfferChangeListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">offerInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//do nothing</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OfferChangeListener</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the getOfferById method, see the API reference.</p>
+<p><strong>Step 3:</strong> Receive price updates for an instrument</p>
+<p>The final step is to receive price updates for an instrument.<br>
+You can use the subscribeStateChange method of the offer object to subscribe to its state changes.<br>
+This method takes an offer's state change listener as an argument and returns a subscription object.<br>
+You can also use the refresh method of the subscription object to manually request a price update.</p>
+<p>Below you can see some example code to receive price updates for an instrument:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="nx">loadOffers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">().</span><span class="nx">getState</span><span class="p">().</span><span class="nx">isLoaded</span><span class="p">())</span>
+<span class="w">            </span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">completeHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CompleteLoadingHandler</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">timeout</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">().</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="nx">completeHandler</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">session</span><span class="p">.</span><span class="nx">getOffersManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">loadInstruments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">completeHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CompleteLoadingHandler</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">me</span><span class="p">.</span><span class="nx">timeout</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="nx">completeHandler</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span><span class="w">     </span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the subscribeStateChange and refresh methods, see the API reference.</p>
+<p>You can download the sample TypeScript and JavaScript code from here. </p>
 
 
 
