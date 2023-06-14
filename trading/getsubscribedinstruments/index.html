@@ -1175,8 +1175,52 @@
 
   <h1>Get Subscribed Instruments</h1>
 
-<p>How to get a list of subscribed instruments</p>
-<p>The FCLite API allows you to programmatically access your subscribed instruments. A subscribed instrument is an instrument that you have chosen to receive price updates for. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>How to get a list of subscribed instruments Overview</p>
+<p>This article will teach you how to use the API to get a list of subscribed instruments.<br>
+Before you can get a list of subscribed instruments, you need to:<br>
+- Create an instance of the instruments manager<br>
+- Get a list of subscribed instruments<br></p>
+<p><strong>Step 1:</strong> Create an instance of the instruments manager</p>
+<p>The first step is to create an instance of the instruments manager.<br>
+This is an object that provides methods for managing instruments.<br>
+You can use the IInstrumentsManager interface to access its methods and properties.</p>
+<p>Below you can see some example code to create an instance of the instruments manager:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span><span class="w"> </span><span class="c1">// refresh it before using it to make sure it contains the latest info</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span><span class="w"> </span><span class="c1">// refresh it before using it to make sure it contains the latest info</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the IInstrumentsManager interface, see the API reference.</p>
+<p><strong>Step 2:</strong> Get a list of subscribed instruments</p>
+<p>The next step is to get a list of instruments that you have subscribed to.<br>
+Subscribing to an instrument means that you will receive updates on its data, such as its price, volume, or spread.<br>
+You can use the getSubscribedInstruments method of the instruments manager to get a list of subscribed instruments. This method returns an array of instrument symbols.</p>
+<p>Below you can see some example code to get a list of subscribed instruments:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">subscribedInstruments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getSubscribedInstruments</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">subscribedInstruments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getSubscribedInstruments</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the getSubscribedInstruments method, see the API reference.</p>
+<p>Conclusion</p>
+<p>You have learned how to use the API to get a list of subscribed instruments. You have created an instance of the instruments manager and got a list of subscribed instruments. You can now use this knowledge to build your own applications that work with subscribed instruments.</p>
+<p>You can download the sample TypeScript and JavaScript code from here. Happy coding!</p>
 
 
 
