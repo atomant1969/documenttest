@@ -1187,35 +1187,93 @@ Before you can get available instruments, you need to:<br>
 <p>The first step is to refresh the session object. This is an object that represents your connection to the API.<br>
 You can use the refresh method of the session object to update its state and data.<br></p>
 <p>To refresh the session object, you need to write some TypeScript or JavaScript code like this:</p>
-<p><typescript code><javascript code></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the session object, see the API reference.</p>
 <p><strong>Step 2:</strong> Create an instrument manager object</p>
 <p>The next step is to create an instrument manager object. This is an object that provides methods for managing instruments.<br>
-You can use the IInstrumentsManager interface to access its methods and properties.</p>
-<p>To create an instrument manager object, you need to write some TypeScript or JavaScript code like this:</p>
-<p><typescript code><javascript code></p>
+You can use the IInstrumentsManager interface to access its methods and properties.<br></p>
+<p>Below you can see some example code to create an instrument manager object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the IInstrumentsManager interface, see the API reference.</p>
 <p><strong>Step 3:</strong> Subscribe to the instrument manager state change event</p>
 <p>The third step is to subscribe to the instrument manager state change event.<br>
 This event is triggered when the instrument manager's state changes, such as when it is loading, loaded, or not loaded.<br>
 You can use the IDataManagerStateChangeListener interface to define a listener function for this event.</p>
-<p>To subscribe to the instrument manager state change event, you need to write some TypeScript or JavaScript code like this:</p>
-<p><typescript code><javascript code></p>
+<p>Below you can see some example code to subscribe to the instrument manager state change event:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">subscribeInstrumentChange</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">InstrumentChangeListener</span><span class="p">(</span><span class="nx">instrumentsManager</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">subscribeStateChange</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the IDataManagerStateChangeListener interface, see the API reference.</p>
 <p><strong>Step 4:</strong> Refresh the instrument manager object</p>
 <p>The fourth step is to refresh the instrument manager object.<br>
 This is a method that requests the latest data from the API and updates the instrument manager's state and data.<br>
 You can use the refresh method of the instrument manager object to perform this action.</p>
-<p>To refresh the instrument manager object, you need to write some TypeScript or JavaScript code like this:</p>
-<p><typescript code><javascript code></p>
+<p>Below you can see some example code to refresh the instrument manager object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">TYPESCRIPT</label><label for="__tabbed_4_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>For more information about the refresh method, see the API reference.</p>
 <p><strong>Step 5:</strong> Get the list of instrument descriptors</p>
 <p>The final step is to get the list of instrument descriptors.<br>
 These are objects that contain short descriptions of available instruments, such as their offer ID, symbol, subscription status, and price stream ID.<br>
 You can use the getAllInstrumentDescriptors method of the instrument manager object to get a list of instrument descriptors.<br>
 This method returns an array of InstrumentDescriptor objects.<br></p>
-<p>To get the list of instrument descriptors, you need to write some TypeScript or JavaScript code like this:</p>
-<p><typescript code><javascript code></p>
+<p>Below you can see some example code to get the list of instrument descriptors:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">TYPESCRIPT</label><label for="__tabbed_5_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">descriptors</span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getAllInstrumentDescriptors</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">descriptors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentManager</span><span class="p">.</span><span class="nx">getAllInstrumentDescriptors</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The class Descriptor allows you to get offer id, subscription status, symbol and other information, full information about instrument is available only after subscription.</p>
+<p>See also IInstrumentsManager, InstrumentDescriptor, getOfferId, getPriceStreamId, getSortOrder, getSubscriptionStatus, getSymbol</p>
+<p>Now that you have your list of instrument, you are ready to subscribe to them or perform other actions on them.</p>
 <p>For more information about the InstrumentDescriptor interface and its methods, see the API reference.</p>
 <p>Conclusion</p>
 <p>You have learned how to use the API to get available instruments. You have refreshed the session object, created an instrument manager object, subscribed to the instrument manager state change event, refreshed the instrument manager object, and got the list of instrument descriptors. You can now use this knowledge to build your own applications that work with available instruments.</p>
