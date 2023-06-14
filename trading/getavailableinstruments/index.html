@@ -1175,8 +1175,51 @@
 
   <h1>Get Available Instruments</h1>
 
-<p>How to get available instruments</p>
-<p>The FCLite API allows you to programmatically access the list of available instruments on the FCLite platform. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>How to get available instruments Overview</p>
+<p>This article will teach you how to use the API to get available instruments.<br>
+Before you can get available instruments, you need to:<br>
+- Refresh the session object<br>
+- Create an instrument manager object<br>
+- Subscribe to the instrument manager state change event<br>
+- Refresh the instrument manager object<br>
+- Get the list of instrument descriptors<br></p>
+<p><strong>Step 1:</strong> Refresh the session object</p>
+<p>The first step is to refresh the session object. This is an object that represents your connection to the API.<br>
+You can use the refresh method of the session object to update its state and data.<br></p>
+<p>To refresh the session object, you need to write some TypeScript or JavaScript code like this:</p>
+<p><typescript code><javascript code></p>
+<p>For more information about the session object, see the API reference.</p>
+<p><strong>Step 2:</strong> Create an instrument manager object</p>
+<p>The next step is to create an instrument manager object. This is an object that provides methods for managing instruments.<br>
+You can use the IInstrumentsManager interface to access its methods and properties.</p>
+<p>To create an instrument manager object, you need to write some TypeScript or JavaScript code like this:</p>
+<p><typescript code><javascript code></p>
+<p>For more information about the IInstrumentsManager interface, see the API reference.</p>
+<p><strong>Step 3:</strong> Subscribe to the instrument manager state change event</p>
+<p>The third step is to subscribe to the instrument manager state change event.<br>
+This event is triggered when the instrument manager's state changes, such as when it is loading, loaded, or not loaded.<br>
+You can use the IDataManagerStateChangeListener interface to define a listener function for this event.</p>
+<p>To subscribe to the instrument manager state change event, you need to write some TypeScript or JavaScript code like this:</p>
+<p><typescript code><javascript code></p>
+<p>For more information about the IDataManagerStateChangeListener interface, see the API reference.</p>
+<p><strong>Step 4:</strong> Refresh the instrument manager object</p>
+<p>The fourth step is to refresh the instrument manager object.<br>
+This is a method that requests the latest data from the API and updates the instrument manager's state and data.<br>
+You can use the refresh method of the instrument manager object to perform this action.</p>
+<p>To refresh the instrument manager object, you need to write some TypeScript or JavaScript code like this:</p>
+<p><typescript code><javascript code></p>
+<p>For more information about the refresh method, see the API reference.</p>
+<p><strong>Step 5:</strong> Get the list of instrument descriptors</p>
+<p>The final step is to get the list of instrument descriptors.<br>
+These are objects that contain short descriptions of available instruments, such as their offer ID, symbol, subscription status, and price stream ID.<br>
+You can use the getAllInstrumentDescriptors method of the instrument manager object to get a list of instrument descriptors.<br>
+This method returns an array of InstrumentDescriptor objects.<br></p>
+<p>To get the list of instrument descriptors, you need to write some TypeScript or JavaScript code like this:</p>
+<p><typescript code><javascript code></p>
+<p>For more information about the InstrumentDescriptor interface and its methods, see the API reference.</p>
+<p>Conclusion</p>
+<p>You have learned how to use the API to get available instruments. You have refreshed the session object, created an instrument manager object, subscribed to the instrument manager state change event, refreshed the instrument manager object, and got the list of instrument descriptors. You can now use this knowledge to build your own applications that work with available instruments.</p>
+<p>You can download the sample TypeScript and JavaScript code from here. Happy coding! </p>
 
 
 
