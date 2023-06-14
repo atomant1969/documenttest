@@ -1175,8 +1175,55 @@
 
   <h1>Get Instrument By Symbol</h1>
 
-<p>How to get an instrument by symbol</p>
-<p>The FCLite API allows you to programmatically access the details of any instrument that is available on the FCLite platform. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. Each instrument has a symbol, a name, a type, and other attributes.</p>
+<p>How to get an instrument by symbol Overview</p>
+<p>In this article will learn how to use the API to get an instrument using its symbol as the reference.<br>
+Before you can get an instrument using its symbol, you need to:<br>
+- Create an instance of the instruments manager
+- Get an instrument by symbol</p>
+<p><strong>Step 1:</strong> Create an instance of the instruments manager</p>
+<p>The first step is to create an instance of the instruments manager.<br>
+This is an object that provides methods for managing instruments.<br>
+You can use the IInstrumentsManager interface to access its methods and properties.<br></p>
+<p>Below you can see some example code to create an instance of the instruments manager:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span><span class="w"> </span><span class="c1">// refresh it before using it to make sure it contains the latest info</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">().</span><span class="nx">refresh</span><span class="p">();</span><span class="w"> </span><span class="c1">// refresh it before using it to make sure it contains the latest info</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getInstrumentsManager</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the IInstrumentsManager interface, see the API reference.</p>
+<p><strong>Step 2:</strong> Get an instrument by symbol</p>
+<p>The next step is to get an instrument by its symbol.<br>
+A symbol is a unique identifier for an instrument, such as EUR/USD or USD/JPY.<br>
+You can use the getInstrumentBySymbol method of the instruments manager to get an instrument by its symbol.<br>
+This method takes a symbol as an argument and returns an instrument object if you have subscribed to it. Otherwise, it returns null.<br></p>
+<p>Below you can see some example code to get an instrument by symbol:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getInstrumentBySymbol</span><span class="p">(</span><span class="s2">&quot;USD/JPY&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">instrument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">instrumentsManager</span><span class="p">.</span><span class="nx">getInstrumentBySymbol</span><span class="p">(</span><span class="s2">&quot;USD/JPY&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the getInstrumentBySymbol method, see the API reference.</p>
+<p>Conclusion</p>
+<p>You have learned how to use the API to get an instrument by symbol.<br>
+You have created an instance of the instruments manager and got an instrument by symbol.<br>
+You can now use this knowledge to build your own applications that work with instruments.</p>
+<p>You can download the sample TypeScript and JavaScript code from here.</p>
 
 
 
