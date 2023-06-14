@@ -1175,8 +1175,106 @@
 
   <h1>Get Historical Prices for an Instrument</h1>
 
-<p>How to get historical prices for an instrument</p>
-<p>The FCLite API allows you to programmatically access the historical prices for any instrument that is available on the FCLite platform. An instrument is a financial asset that can be traded, such as a stock, a currency pair, or a commodity. A historical price is the price of an instrument at a specific point in time in the past.</p>
+<p>How to receive historical prices for an instrument Overview</p>
+<p>This article will show you how to use the API to receive historical prices for an instrument. 
+Before you can get historical data, you need to:
+- Create a callback class for receiving price history
+- Get the price history of an instrument
+- Check if the price history contains an ask price</p>
+<p><strong>Step 1:</strong> Create a callback class for receiving price history</p>
+<p>The first step is to create a callback class that will handle the response from the API when requesting price history.<br>
+You can use the PriceHistoryManagerCallback interface to define the methods of this class.</p>
+<p>Below you can see some example code for creating a callback class for receiving price history:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">TYPESCRIPT</label><label for="__tabbed_1_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">IPriceHistoryManagerCallback</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">resolve</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">app</span><span class="o">:</span><span class="w"> </span><span class="kt">Application</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">onSuccess</span><span class="p">(</span><span class="nx">responseObject</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IPriceHistoryResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">PriceHistoryPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span><span class="nx">responseObject</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">onError</span><span class="p">(</span><span class="nx">errorObject</span><span class="o">:</span><span class="w"> </span><span class="kt">FXConnectLite.IFXConnectLiteError</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Printer</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">errorObject</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">resolve</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="o">:</span><span class="w"> </span><span class="kt">Application</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resolve</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/** @class */</span><span class="w"> </span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resolve</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">app</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">responseObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">PriceHistoryPrinter</span><span class="p">.</span><span class="nx">printAll</span><span class="p">(</span><span class="nx">responseObject</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">onError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">errorObject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errorObject</span><span class="p">.</span><span class="nx">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">;</span>
+<span class="p">}());</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the PriceHistoryManagerCallback interface, see the API reference.</p>
+<p><strong>Step 2:</strong> Get the price history of an instrument</p>
+<p>The next step is to get the price history of a specific instrument. 
+You can use the getPriceHistory method of the API to request the price history of an instrument by its name. 
+This method takes a PriceHistoryManagerCallback object as an argument and calls its onSuccess or onError method depending on the result.</p>
+<p>Below you can see some example code for getting the price history of an instrument:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TYPESCRIPT</label><label for="__tabbed_2_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getPriceHistoryManager</span><span class="p">();</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">timeframe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">Timeframe</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">TimeframeUnit</span><span class="p">.</span><span class="nx">Minute</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">getPrices</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">instrument</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">timeframe</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getPriceHistoryManager</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">timeframe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">Timeframe</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">FXConnectLite</span><span class="p">.</span><span class="nx">TimeframeUnit</span><span class="p">.</span><span class="nx">Minute</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">);</span>
+<span class="nx">manager</span><span class="p">.</span><span class="nx">getPrices</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">instrument</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">timeframe</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="kr">from</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">to</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">PriceHistoryManagerCallback</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">));</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the getPriceHistory method, see the API reference.</p>
+<p><strong>Step 3:</strong> Check if the price history contains an ask price</p>
+<p>The final step is to check if the price history of an instrument contains an ask price.<br>
+The ask price is the price at which you can buy an instrument. You need to know the ask price to correctly place limit buy orders.<br>
+However, not all instruments have an ask price in their history.</p>
+<p>To check if the price history of an instrument contains an ask price, you can use the hasAskPrice method of the API.<br>
+This method takes the name of the instrument as an argument and returns a boolean value.<br>
+The method will return true if the instrument's history has an ask price, and false if it does not.</p>
+<p>Below you can see some example code to check if the price history contains an ask price:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">TYPESCRIPT</label><label for="__tabbed_3_2">JAVASCRIPT</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getPriceHistoryManager</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">hasAskPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">hasAskPrice</span><span class="p">(</span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">getPriceHistoryManager</span><span class="p">();</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">hasAskPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">manager</span><span class="p">.</span><span class="nx">hasAskPrice</span><span class="p">(</span><span class="s2">&quot;EUR/USD&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>For more information about the hasAskPrice method, see the API reference.</p>
+<p>You can download the sample TypeScript and JavaScript.</p>
 
 
 
